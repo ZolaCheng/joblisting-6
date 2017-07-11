@@ -8,6 +8,7 @@ class Job < ApplicationRecord
 
   validates :wage_lower_bound, numericality: {less_than: :wage_upper_bound, message: "薪水下限不能高于薪水上限"}
 
+  has_many :resumes
 
   def publish!
     self.is_hidden = false
@@ -21,5 +22,5 @@ class Job < ApplicationRecord
 
   scope :published, -> { where(is_hidden: false) }
   scope :recent, -> { order('created_at DESC') }
-  
+
 end
